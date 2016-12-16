@@ -32,8 +32,9 @@
 				<section>
 					<h1>Versionsverwaltung<br/> und Git</h1>
 					<strong>Softwaretechnik Übung – WiSe 2016</strong><br/>
-					2016-12-16<br/>
-					Natanael Arndt
+					2016-12-16
+					<pre><code class="hljs bash">$ git config --global user.name "Natanael Arndt"
+$ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 				</section>
 				<section>
 					<h2>Warum?</h2>
@@ -91,9 +92,7 @@
 					</section>
 					<section>
 					<h3>Subversion (SVN)</h3>
-					<pre>
-					<code class="hljs bash">
-$ svnadmin create /tmp/svn/repo
+					<pre><code class="hljs bash">$ svnadmin create /tmp/svn/repo
 $ # … set "anon-access = write" in conf/svnserve.conf
 $ cd repo &amp;&amp; svnserve -d &amp;&amp; cd ..
 $ svn checkout svn://localhost/tmp/svn/repo workingcopy
@@ -105,20 +104,14 @@ A         file.txt
 $ svn commit -m "Initial commit"
 Füge hinzu         file.txt
 Übertrage Daten .
-Revision 1 übertragen.
-					</code>
-					</pre>
+Revision 1 übertragen.</code></pre>
 					</section>
 					<section>
 					<h3>Subversion (SVN)</h3>
-					<pre>
-					<code class="hljs bash">
-$ svn checkout … # download aktuelle Version
+					<pre><code class="hljs bash">$ svn checkout … # download aktuelle Version
 $ svn add …      # setze Datei unter Versionsverwaltung
 $ svn commit …   # übertrage neue Version zum Server
-$ svn update     # aktualisiere Lokale Version
-					</code>
-					</pre>
+$ svn update     # aktualisiere Lokale Version</code></pre>
 					</section>
 				</section>
 				<section>
@@ -148,32 +141,24 @@ $ svn update     # aktualisiere Lokale Version
 						<ul>
 							<li>Initialisieren eines neuen leeren Repositories</li>
 						</ul>
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial
+						<pre><code class="hljs bash">$ cd ~/git-tutorial
 $ git init repo
 Initialisierte leeres Git-Repository in
-/home/natanael/git-tutorial/repo/.git/
-						</code>
-						</pre>
+/home/natanael/git-tutorial/repo/.git/</code></pre>
 					</section>
 					<section>
 						<h1>.git</h1>
 						<ul>
 							<li>Was liegt in dem versteckten Ordner</li>
 						</ul>
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/repo
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/repo
 $ ls
 
 $ ls -a
 .  ..  .git
 $ cd .git
 $ ls
-branches  config  description  HEAD  hooks  info  objects  refs
-						</code>
-						</pre>
+branches  config  description  HEAD  hooks  info  objects  refs</code></pre>
 						<a href="http://gitready.com/advanced/2009/03/23/whats-inside-your-git-directory.html">what's inside your .git directory</a>
 					</section>
 					<section>
@@ -181,19 +166,14 @@ branches  config  description  HEAD  hooks  info  objects  refs
 						<ul>
 							<li>Was ist in meinem Repository los?</li>
 						</ul>
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/repo
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/repo
 $ git status
 Auf Branch master
 
 Initialer Commit
 
 nichts zu committen (Erstellen/Kopieren Sie Dateien und benutzen
-Sie "git add" zum Beobachten)
-
-						</code>
-						</pre>
+Sie "git add" zum Beobachten)</code></pre>
 					</section>
 				</section>
 				<section>
@@ -202,9 +182,7 @@ Sie "git add" zum Beobachten)
 						<ul>
 							<li>Eine Datei unter Versionskontrolle stellen</li>
 						</ul>
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/repo
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/repo
 $ echo "Hallo Git" > file.txt
 $ git status
 Auf Branch master
@@ -218,15 +196,11 @@ Unbeobachtete Dateien:
 	file.txt
 
 nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
-(benutzen Sie "git add" zum Beobachten)
-						</code>
-						</pre>
+(benutzen Sie "git add" zum Beobachten)</code></pre>
 					</section>
 					<section>
 						<h1>git add …</h1>
-						<pre>
-						<code class="hljs bash">
-$ git add file.txt
+						<pre><code class="hljs bash">$ git add file.txt
 $ git status
 Auf Branch master
 
@@ -236,27 +210,28 @@ zum Commit vorgemerkte Änderungen:
   (benutzen Sie "git rm --cached &lt;Datei&gt;..." zum Entfernen aus
 	  derStaging-Area)
 
-	neue Datei:     file.txt
-
-
-						</code>
-						</pre>
+	neue Datei:     file.txt</code></pre>
 					</section>
 				</section>
 				<section>
 					<section>
+						<h1>git commit (Konfiguration)</h1>
+						<ul>
+							<li>Vor dem ersten Commit muss der Namen und die E-Mail des commiters konfiguriert werden</li>
+						</ul>
+						<pre><code class="hljs bash">$ git config --global user.name "Natanael Arndt"
+$ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
+					</section>
+
+					<section>
 						<h1>git commit</h1>
-						<pre>
-						<code class="hljs bash">
-$ git commit -m "Hallo Git"
+						<pre><code class="hljs bash">$ git commit -m "Hallo Git"
 [master (Basis-Commit) 6b7add4] Hallo Git
  1 file changed, 1 insertion(+)
  create mode 100644 file.txt
 $ git status
 Auf Branch master
-nichts zu committen, Arbeitsverzeichnis unverändert
-						</code>
-						</pre>
+nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
 						<canvas id="gitinitGraph"></canvas>
 						<script>
 						slidehooks.push(function () {
@@ -273,9 +248,7 @@ nichts zu committen, Arbeitsverzeichnis unverändert
 					</section>
 					<section>
 						<h1>git commit …</h1>
-						<pre>
-						<code class="hljs bash">
-$ echo "again" >> file.txt
+						<pre><code class="hljs bash">$ echo "again" >> file.txt
 $ git status
 Auf Branch master
 Änderungen, die nicht zum Commit vorgemerkt sind:
@@ -287,23 +260,16 @@ Auf Branch master
 	geändert:       file.txt
 
 keine Änderungen zum Commit vorgemerkt (benutzen Sie "git add"
-und/oder "git commit -a")
-
-						</code>
-						</pre>
+und/oder "git commit -a")</code></pre>
 					</section>
 					<section>
 						<h1>git commit …</h1>
-						<pre>
-						<code class="hljs bash">
-$ git commit -m "again"
+						<pre><code class="hljs bash">$ git commit -m "again"
 [master 0a777cb] again
  1 file changed, 1 insertion(+)
 $ git status
 Auf Branch master
-nichts zu committen, Arbeitsverzeichnis unverändert
-						</code>
-						</pre>
+nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
 						<canvas id="gitcommitGraph"></canvas>
 						<script>
 						slidehooks.push(function () {
@@ -323,23 +289,18 @@ nichts zu committen, Arbeitsverzeichnis unverändert
 				<section>
 					<section>
 						<h1>git log</h1>
-						<pre>
-						<code class="hljs bash">
-$ git log
+						<pre><code class="hljs bash">$ git log
 commit 0a777cba46cd556a1246d033e0b11dedbfee6815
-Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
 Date:   Fri Dec 16 01:55:56 2016 +0100
 
     again
 
 commit 6b7add4815e9c99d1f3f44c03cea58339b408f4d
-Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
 Date:   Fri Dec 16 01:49:44 2016 +0100
 
-    Hallo Git
-
-						</code>
-						</pre>
+    Hallo Git</code></pre>
 					</section>
 				</section>
 
@@ -349,63 +310,54 @@ Date:   Fri Dec 16 01:49:44 2016 +0100
 						<ul>
 							<li>Dient zur aktiven Übertragung eines Branches an ein entferntes Repository</li>
 						</ul>
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/remote-repo
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/remote-repo
 $ git init --bare
 Initialisierte leeres Git-Repository in
 /home/natanael/git-tutorial/remote-repo
 $ ls -a
 .   branches  description  hooks  objects
-..  config    HEAD         info   refs
-						</code>
-						</pre>
+..  config    HEAD         info   refs</code></pre>
 					</section>
 					<section>
 						<h1>git push (und git remote)</h1>
 						<ul>
 							<li>Zur Übertragung muss das entfernte Repository als <em>remote</em> eingetragen werden</li>
 						</ul>
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/repo
-$ git remote -v
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/repo
 $ git remote add anderes ../remote-repo
 $ git remote -v
-anderes	../remote (fetch)
-anderes	../remote (push)
-$ git push anderes master
+anderes	../remote-repo (fetch)
+anderes	../remote-repo (push)
+$ git push --set-upstream anderes master
 Zähle Objekte: 6, Fertig.
 Delta compression using up to 4 threads.
 Komprimiere Objekte: 100% (2/2), Fertig.
 Schreibe Objekte: 100% (6/6), 444 bytes | 0 bytes/s, Fertig.
 Total 6 (delta 0), reused 0 (delta 0)
 To ../remote-repo
- * [new branch]      master -> master
-						</code>
-						</pre>
+ * [new branch]      master -> master</code></pre>
+
+<span style="font-size: .8em">
+ <em>--set-upstream</em> bzw. <em>-u</em> ist nur einmal notwendig, um den Branch dem remote Vranch zuzuordnen.
+ Alternativ <em>git branch --set-upstream-to=anderes/master</em> .
+</span>
 					</section>
 					<section>
-						<h1>git push (ung git remote)</h1>
+						<h1>git push (und git remote)</h1>
 
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/remote-repo
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/remote-repo
 $ git log
 commit 0a777cba46cd556a1246d033e0b11dedbfee6815
-Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
 Date:   Fri Dec 16 01:55:56 2016 +0100
 
     again
 
 commit 6b7add4815e9c99d1f3f44c03cea58339b408f4d
-Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
 Date:   Fri Dec 16 01:49:44 2016 +0100
 
-    Hallo Git
-
-						</code>
-						</pre>
+    Hallo Git</code></pre>
 					</section>
 				</section>
 
@@ -416,10 +368,8 @@ Date:   Fri Dec 16 01:49:44 2016 +0100
 							<li>Dient zur Replikation eines entfernten Repositories</li>
 						</ul>
 
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/
-$ git cone remote-repo/ local/
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/
+$ git clone remote-repo/ local/
 Klone nach 'local'...
 Fertig.
 $ cd local/
@@ -427,9 +377,7 @@ $ ls -a
 .  ..  file.txt  .git
 $ git remote -v
 origin	/home/natanael/git-tutorial/remote-repo (fetch)
-origin	/home/natanael/git-tutorial/remote-repo (push)
-						</code>
-						</pre>
+origin	/home/natanael/git-tutorial/remote-repo (push)</code></pre>
 						<canvas id="gitcloneGraphA"></canvas>
 						<script>
 						slidehooks.push(function () {
@@ -447,9 +395,7 @@ origin	/home/natanael/git-tutorial/remote-repo (push)
 					<section>
 						<h1>git clone und ein neuer Beitrag</h1>
 
-						<pre>
-						<code class="hljs bash">
-$ cd ~/git-tutorial/local/
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
 $ echo "Beitrag" > file2.txt
 $ git status
 Auf Branch master
@@ -461,9 +407,7 @@ Unbeobachtete Dateien:
 	file2.txt
 
 nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
-(benutzen Sie "git add" zum Beobachten)
-						</code>
-						</pre>
+(benutzen Sie "git add" zum Beobachten)</code></pre>
 						<canvas id="gitcloneGraphB"></canvas>
 						<script>
 						slidehooks.push(function () {
@@ -481,9 +425,7 @@ nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
 					<section>
 						<h1>… git add …</h1>
 
-						<pre>
-						<code class="hljs bash">
-$ git add file2.txt
+						<pre><code class="hljs bash">$ git add file2.txt
 $ git status
 Auf Branch master
 Ihr Branch ist auf dem selben Stand wie 'origin/master'.
@@ -491,9 +433,7 @@ zum Commit vorgemerkte Änderungen:
   (benutzen Sie "git reset HEAD &lt;Datei&gt;..." zum Entfernen aus
   der Staging-Area)
 
-	neue Datei:     file2.txt
-						</code>
-						</pre>
+	neue Datei:     file2.txt</code></pre>
 						<canvas id="gitcloneGraphC"></canvas>
 						<script>
 						slidehooks.push(function () {
@@ -511,9 +451,7 @@ zum Commit vorgemerkte Änderungen:
 					<section>
 						<h1>… git commit …</h1>
 
-						<pre>
-						<code class="hljs bash">
-$ git commit -m "Ein neuer Beitrag"
+						<pre><code class="hljs bash">$ git commit -m "Ein neuer Beitrag"
 [master a7155b7] ein neuer Beitrag
  1 file changed, 1 insertion(+)
  create mode 100644 file2.txt
@@ -521,9 +459,7 @@ $ git status
 Auf Branch master
 Ihr Branch ist vor 'origin/master' um 1 Commit.
   (benutzen Sie "git push", um lokale Commits zu publizieren)
-nichts zu committen, Arbeitsverzeichnis unverändert
-						</code>
-						</pre>
+nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
 						<canvas id="gitcloneGraphD"></canvas>
 						<canvas id="gitremoteGraphD"></canvas>
 						<script>
@@ -551,9 +487,7 @@ nichts zu committen, Arbeitsverzeichnis unverändert
 					<section>
 						<h1>… git push</h1>
 
-						<pre>
-						<code class="hljs bash">
-$ git push
+						<pre><code class="hljs bash">$ git push
 Zähle Objekte: 3, Fertig.
 Delta compression using up to 4 threads.
 Komprimiere Objekte: 100% (2/2), Fertig.
@@ -561,9 +495,7 @@ Schreibe Objekte: 100% (3/3), 279 bytes | 0 bytes/s, Fertig.
 Total 3 (delta 0), reused 0 (delta 0)
 To /home/natanael/git-tutorial/remote-repo
    0a777cb..a7155b7  master -> master
-$ git status
-						</code>
-						</pre>
+$ git status</code></pre>
 						<canvas id="gitcloneGraphE"></canvas>
 						<canvas id="gitremoteGraphE"></canvas>
 						<script>
@@ -592,19 +524,258 @@ $ git status
 
 				<section>
 					<section>
-						<h1>git fetch und git pull</h1>
+						<h1>git fetch</h1>
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+$ ls -a
+.  ..  file.txt  .git
+$ git fetch anderes
+remote: Zähle Objekte: 3, Fertig.
+remote: Komprimiere Objekte: 100% (2/2), Fertig.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Entpacke Objekte: 100% (3/3), Fertig.
+Von /home/natanael/git-tutorial/remote-repo
+   0a777cb..a7155b7  master     -> origin/master
+$ ls -a
+.  ..  file.txt  .git</code></pre>
+						<canvas id="gitfetchGraphF"></canvas>
+						<canvas id="gitremoteGraphF"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitfetchGraphF",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+							var gitRemoteGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitremoteGraphF",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
+						var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
+						});
+						</script>
+					</section>
+					<section>
+						<h1>git fetch und git merge</h1>
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+$ git status
+Auf Branch master
+Ihr Branch ist zu 'origin/master' um 1 Commit hinterher, und kann
+vorgespult werden.
+  (benutzen Sie "git pull", um Ihren lokalen Branch zu
+  aktualisieren)
+nichts zu committen, Arbeitsverzeichnis unverändert
+$ git merge anderes/master
+Aktualisiere 0a777cb..a7155b7
+Fast-forward
+ file2.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file2.txt</code></pre>
+						<canvas id="gitfetchGraphG"></canvas>
+						<canvas id="gitremoteGraphG"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitfetchGraphG",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+							var gitRemoteGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitremoteGraphG",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
+						var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
+						});
+						</script>
+					</section>
+					<section>
+						<h1>git fetch und git merge</h1>
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+$ git status
+Auf Branch master
+Ihr Branch ist auf dem selben Stand wie 'origin/master'.
+nichts zu committen, Arbeitsverzeichnis unverändert
+$ ls -a
+.  ..  file2.txt  file.txt  .git</code></pre>
+						<canvas id="gitfetchGraphG"></canvas>
+						<canvas id="gitremoteGraphG"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitfetchGraphG",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+							var gitRemoteGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitremoteGraphG",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
+						var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
+						});
+						</script>
+					</section>
+					<section>
+						<h1>git fetch + git merge<br/>= git pull</h1>
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+$ git pull
+Aktualisiere a7155b7..910e6f9
+Fast-forward
+ file2.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ ls -a
+.  ..  file2.txt  file.txt  .git</code></pre>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h1>branch</h1>
+						<ul>
+							<li>Mit git ist eine Verzweigung der Entwicklung einfach möglich</li>
+						</ul>
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+$ git branch feature
+$ git branch
+  feature
+* master
+$ echo "beitrag auf master" >> file.txt
+$ git add file.txt
+$ git commit -m "beitrag auf master"
+[master 3ff104e] beitrag auf master
+ 1 file changed, 1 insertion(+)
+</code></pre>
+						<canvas id="gitbranchGraph"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitbranchGraph",
+							   mode: "compact",
+							   orientation: "horizontal",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git")
+						.commit("again")
+						.commit({
+							message: "Ein neuer Beitrag",
+							tag: "feature",
+						}).commit({
+							message: "beitrag auf master",
+							dotColor: "white",
+							tag: "master (hier sind wir)"});
+						});
+						</script>
+					</section>
+					<section>
+						<h1>branch</h1>
+						<pre><code class="hljs bash">$ git checkout feature
+$ git branch
+* feature
+  master
+$ echo "beitrag auf feature" >> file2.txt
+$ git add file2.txt
+$ git commit -m "beitrag auf feature"
+[master 3ff104e] beitrag auf master
+ 1 file changed, 1 insertion(+)
+</code></pre>
+						<canvas id="gitbranchGraphB"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitbranchGraphB",
+							   mode: "compact",
+							   orientation: "horizontal",
+							   reverseArrow: true
+							});
+
+							var master = gitGraph.branch("master").commit("Hallo Git")
+							.commit("again")
+							.commit({
+								message: "Ein neuer Beitrag"
+							});
+							var feature = master.branch("feature");
+							master.commit({
+								message: "beitrag auf master",
+								dotColor: "white",
+								tag: "master"});
+							feature.commit({
+								message: "beitrag auf feature",
+								dotColor: "blue",
+								tag: "feature (hier sind wir)"});
+						});
+						</script>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h1>git merge</h1>
+						<pre><code class="hljs bash">$ git checkout master
+$ git branch
+  feature
+* master
+$ git merge feature
+Aktualisiere 3ff104e..85de3a4
+Fast-forward
+ file2.txt | 1 +
+ 1 file changed, 1 insertion(+)
+$ tail -n 1 file*
+==> file2.txt <==
+beitrag auf feature
+
+==> file.txt <==
+beitrag auf master
+</code></pre>
+						<canvas id="gitmergeGraph"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitmergeGraph",
+							   mode: "compact",
+							   orientation: "horizontal",
+							   reverseArrow: true
+							});
+
+							var master = gitGraph.branch("master").commit("Hallo Git")
+							.commit("again")
+							.commit({
+								message: "Ein neuer Beitrag"
+							});
+							var feature = master.branch("feature");
+							master.commit({
+								message: "beitrag auf master"});
+							feature.commit({
+								message: "beitrag auf feature",
+								dotColor: "blue",
+								tag: "feature"});
+							feature.merge(master, {message: "merge feature",
+								dotColor: "white",
+								tag: "master (hier sind wir)"});
+						});
+						</script>
 					</section>
 				</section>
 
@@ -616,7 +787,148 @@ $ git status
 							<li>Ein Push kann verweigert werden (<em>reject</em>), wenn eine lokale Änderung durch eine Entfernte Änderung überholt wurde (<em>divergiert</em>)</li>
 						</ul>
 					</section>
+
+					<section>
+						<h1>Merge Konflikt</h1>
+
+						<pre><code class="hljs bash">$ git merge feature
+automatischer Merge von file.txt
+KONFLIKT (Inhalt): Merge-Konflikt in file.txt
+Automatischer Merge fehlgeschlagen; beheben Sie die Konflikte und committen Sie dann das Ergebnis.
+$ git status
+Auf Branch master
+Ihr Branch ist vor 'origin/master' um 3 Commits.
+  (benutzen Sie "git push", um lokale Commits zu publizieren)
+Sie haben nicht zusammengeführte Pfade.
+ (beheben Sie die Konflikte und führen Sie "git commit" aus)
+
+Nicht zusammengeführte Pfade:
+  (benutzen Sie "git add/rm &lt;Datei&gt;...", um die Auflösung zu markieren)
+
+	von beiden geändert:    file.txt
+
+keine Änderungen zum Commit vorgemerkt (benutzen Sie "git add" und/oder "git commit -a")
+</code></pre>
+					</section>
+
+
+					<section>
+						<h1>Merge Konflikt</h1>
+
+						<pre><code class="hljs bash">
+$ cat file.txt
+Hallo Git
+again
+<<<<<<< HEAD
+beitrag auf master
+=======
+beitrag auf feature
+>>>>>>> feature
+$ vim file.txt
+$ cat file.txt
+Hallo Git
+again
+beitrag auf master und feature
+$ git add file.txt
+$ git commit</code></pre>
+					</section>
+
+					<section>
+						<h1>Push Konflikt</h1>
+
+						<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+$ git push
+To /home/natanael/git-tutorial/remote-repo
+! [rejected]        master -> master (fetch first)
+error: Fehler beim Versenden einiger Referenzen nach '/tmp/gituebung/remote-repo'
+Hinweis: Aktualisierungen wurden zurückgewiesen, weil das Remote-Repository Commits enthält,
+Hinweis: die lokal nicht vorhanden sind. Das wird üblicherweise durch einen "push" von
+Hinweis: Commits auf dieselbe Referenz von einem anderen Repository aus verursacht.
+Hinweis: Vielleicht müssen Sie die externen Änderungen zusammenzuführen (z.B. 'git pull ...')
+Hinweis: bevor Sie erneut "push" ausführen.
+Hinweis: Siehe auch die Sektion 'Note about fast-forwards' in 'git push --help'
+Hinweis: für weitere Details.</code></pre>
+					</section>
+
+					<section>
+						<h1>Push Konflikt</h1>
+
+						<canvas id="gitpushKonf"></canvas>
+						<canvas id="gitpushKonfB"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitpushKonf",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+							var gitRemoteGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitpushKonfB",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit({message: "Ein neuer Beitrag", dotColor: "blue"});
+						var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit({message: "Ein anderer Beitrag", dotColor: "red"});
+						});
+						</script>
+
+					</section>
+
+					<section>
+						<h1>Push Konflikt (merge)</h1>
+						<pre><code class="hljs bash">$ git merge origin/master</code></pre>
+
+						<canvas id="gitpushKonfM"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitpushKonfM",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
+						var masterRemote = master.branch("origin/master");
+						master.commit({message: "Ein neuer Beitrag", dotColor: "blue"});
+						masterRemote.commit({message: "Ein anderer Beitrag", dotColor: "red"});
+						master.merge(masterRemote);
+						});
+						</script>
+
+					</section>
+
+					<section>
+						<h1>Push Konflikt (rebase)</h1>
+						<pre><code class="hljs bash">$ git rebase origin/master</code></pre>
+
+						<canvas id="gitpushKonfR"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitpushKonfR",
+							   mode: "compact",
+							   orientation: "vertical",
+							   reverseArrow: true
+							});
+
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
+						//var masterRemote = master.branch("origin/master");
+						master.commit({message: "Ein neuer Beitrag", dotColor: "blue"}).commit({message: "Ein anderer Beitrag", dotColor: "orange"});
+						});
+						</script>
+
+					</section>
+
 				</section>
+
 
 				<section>
 					<canvas id="gitGraph"></canvas>
