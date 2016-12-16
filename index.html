@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
 		<!-- CSS for Git visualization -->
-		<link rel="stylesheet" href="bower_components/gitgraph.js/src/gitgraph.css">
+		<link rel="stylesheet" href="css/gitgraph.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -960,11 +960,6 @@ Hinweis: für weitere Details.</code></pre>
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>
-
-		<!-- Lib for Git visualisation -->
-		<script src="bower_components/gitgraph.js/src/gitgraph.js"></script>
-
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
@@ -975,15 +970,16 @@ Hinweis: für weitere Details.</code></pre>
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/gitgraph-js/gitgraph.js', async: true, callback: function() {
+						for (var i = 0; i < slidehooks.length; i++) {
+							slidehooks[i]();
+						}
+					} }
 				]
 			});
 
-			$(document).ready(function() {
-				for (var i = 0; i < slidehooks.length; i++) {
-					slidehooks[i]();
-				}
-			});
+
 
 		</script>
 	</body>
