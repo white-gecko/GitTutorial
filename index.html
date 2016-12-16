@@ -204,7 +204,7 @@ Sie "git add" zum Beobachten)
 						</ul>
 						<pre>
 						<code class="hljs bash">
-$ cd ~/git-tutorial
+$ cd ~/git-tutorial/repo
 $ echo "Hallo Git" > file.txt
 $ git status
 Auf Branch master
@@ -263,8 +263,8 @@ nichts zu committen, Arbeitsverzeichnis unverändert
 							var gitGraph = new GitGraph({
 							   template: "meteor",
 							   elementId: "gitinitGraph",
-							   mode: "compact",
-							   orientation: "horizontal",
+							   mode: "extended",
+							   orientation: "vertical",console.log();
 							   reverseArrow: true
 							});
 						var master = gitGraph.branch("master").commit("Hallo Git");
@@ -310,8 +310,8 @@ nichts zu committen, Arbeitsverzeichnis unverändert
 							var gitGraph = new GitGraph({
 							   template: "meteor",
 							   elementId: "gitcommitGraph",
-							   mode: "compact",
-							   orientation: "horizontal",
+							   mode: "extended",
+							   orientation: "vertical",
 							   reverseArrow: true
 							});
 						var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
@@ -323,12 +323,92 @@ nichts zu committen, Arbeitsverzeichnis unverändert
 				<section>
 					<section>
 						<h1>git log</h1>
+						<pre>
+						<code class="hljs bash">
+$ git log
+commit 0a777cba46cd556a1246d033e0b11dedbfee6815
+Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Date:   Fri Dec 16 01:55:56 2016 +0100
+
+    again
+
+commit 6b7add4815e9c99d1f3f44c03cea58339b408f4d
+Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Date:   Fri Dec 16 01:49:44 2016 +0100
+
+    Hallo Git
+
+						</code>
+						</pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>git push (und git remote)</h1>
+						<ul>Dient zur aktiven Übertragung eines Branches an ein entferntes Repository</ul>
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial/remote-repo
+$ git init --bare
+Initialisierte leeres Git-Repository in
+/home/natanael/git-tutorial/remote-repo
+$ ls -a
+.   branches  description  hooks  objects
+..  config    HEAD         info   refs
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h1>git push (und git remote)</h1>
+						<ul>Zur Übertragung muss das entfernte Repository als <em>remote</em> eingetragen werden</ul>
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial/repo
+$ git remote -v
+$ git remote add anderes ../remote-repo
+$ git remote -v
+anderes	../remote (fetch)
+anderes	../remote (push)
+$ git push anderes master
+Zähle Objekte: 6, Fertig.
+Delta compression using up to 4 threads.
+Komprimiere Objekte: 100% (2/2), Fertig.
+Schreibe Objekte: 100% (6/6), 444 bytes | 0 bytes/s, Fertig.
+Total 6 (delta 0), reused 0 (delta 0)
+To ../remote-repo
+ * [new branch]      master -> master
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h1>git push (ung git remote)</h1>
+
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial/remote-repo
+$ git log
+commit 0a777cba46cd556a1246d033e0b11dedbfee6815
+Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Date:   Fri Dec 16 01:55:56 2016 +0100
+
+    again
+
+commit 6b7add4815e9c99d1f3f44c03cea58339b408f4d
+Author: Natanael Arndt &lt;arndtn@gmail.com&gt;
+Date:   Fri Dec 16 01:49:44 2016 +0100
+
+    Hallo Git
+
+						</code>
+						</pre>
 					</section>
 				</section>
 
 				<section>
 					<section>
 						<h1>git clone</h1>
+						<ul>
 					</section>
 				</section>
 
