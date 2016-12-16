@@ -13,6 +13,9 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<!-- CSS for Git visualization -->
+		<link rel="stylesheet" href="bower_components/gitgraph.js/src/gitgraph.css">
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -20,6 +23,7 @@
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
+			var slidehooks = new Array();
 		</script>
 	</head>
 	<body>
@@ -39,11 +43,341 @@
 						<li>Wiederherstellung eines beliebigen Entwicklungstands</li>
 					</ul>
 				</section>
+				<section>
+					<h2>Lokaler Ansatz</h2>
+					<ul>
+						<li>Snapshots der Entwicklung liegen lokal vor</li>
+						<li>Es kann schnell auf eine beliebige Version zugegriffen werden</li>
+						<li>Versionen können verglichen werden</li>
+						<li class="fragment" data-fragment-index="2">Es ist aber nur eine lineare History vorhanden</li>
+						<li class="fragment" data-fragment-index="3">Kein Austausch mit Mitarbeitern</li>
+					</ul>
+					<canvas  class="fragment" data-fragment-index="1" id="versionGraph"></canvas>
+					<script>
+					slidehooks.push(function () {
+						var gitGraph = new GitGraph({
+						   elementId: "versionGraph",
+						   template: "meteor",
+						   mode: "compact",
+						   orientation: "horizontal",
+						   reverseArrow: true
+						});
+
+						var master = gitGraph.branch("master").commit("Hallo").commit().commit().commit();
+					});
+					</script>
+				</section>
+				<section>
+					<section>
+					<h2>Zentraler Ansatz</h2>
+					<ul>
+						<li>Snapshots oder Deltas werden an einen zentralen Server übertragen</li>
+						<li>Austausch mit Mitarbeitern</li>
+						<li>Zugriff auf Versionen ist etwas langsamer</li>
+						<li>Es muss ein Konsens hergestellt werden</li>
+						<li>Rudimentäre Unterstützung für Branches</li>
+						<li>Bsp. Concurrent Versions System (CVS), Subversion (SVN)</li>
+					</ul>
+					</section>
+					<section>
+					<h3>Subversion (SVN)</h3>
+					<ul>
+						<li>Commits: atomare Operationen</li>
+						<li>Branching: verzweigung der Versionen</li>
+						<li>Merging: Zusammenführung von verweigten Versionen</li>
+						<li>Tagging: Merkieren von bestimmten Versionen</li>
+						<li>Diff: vergleich zwischen Versionen</li>
+					</ul>
+					</section>
+					<section>
+					<h3>Subversion (SVN)</h3>
+					<pre>
+					<code class="hljs bash">
+$ svnadmin create /tmp/svn/repo
+$ # … set "anon-access = write" in conf/svnserve.conf
+$ cd repo &amp;&amp; svnserve -d &amp;&amp; cd ..
+$ svn checkout svn://localhost/tmp/svn/repo workingcopy
+Ausgecheckt, Revision 0.
+$ cd workingcopy
+$ echo "Hallo" > file.txt
+$ svn add file.txt
+A         file.txt
+$ svn commit -m "Initial commit"
+Füge hinzu         file.txt
+Übertrage Daten .
+Revision 1 übertragen.
+					</code>
+					</pre>
+					</section>
+					<section>
+					<h3>Subversion (SVN)</h3>
+					<pre>
+					<code class="hljs bash">
+$ svn checkout … # download aktuelle Version
+$ svn add …      # setze Datei unter Versionsverwaltung
+$ svn commit …   # übertrage neue Version zum Server
+$ svn update     # aktualisiere Lokale Version
+					</code>
+					</pre>
+					</section>
+				</section>
+				<section>
+					<h1>Verteilerter Ansatz</h1>
+					<ul>
+						<li>Es können mehere Server existieren</li>
+						<li>Lokale Version beinhaltet die komplete Versionsgeschichte</li>
+						<li>Zugriff auf Versionen ist schnell</li>
+						<li>Es muss kein Konsens existieren</li>
+						<li>Beliebige Branches auf unterschiedlichen Systemen erlaubt</li>
+						<li>Bsp. Mercurial, Bazar, …, Git</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Git</h1>
+					<ul>
+						<li>2005 von Linus Torvalds begonnen</li>
+						<li>… um BitKeeper für die Kernel Entwicklung zu ersetzen</li>
+						<li>Aktuell sehr weit verbreitet: GitHut, GitLab, Bitbucket, …</li>
+						<li>Version 2.11.0 (2016-11-29)</li>
+						<li><a href="https://www.git-scm.com/">https://www.git-scm.com/</a></li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h1>git init</h1>
+						<ul>
+							<li>Initialisieren eines neuen leeren Repositories</li>
+						</ul>
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial
+$ git init repo
+Initialisierte leeres Git-Repository in
+/home/natanael/git-tutorial/repo/.git/
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h1>.git</h1>
+						<ul>
+							<li>Was liegt in dem versteckten Ordner</li>
+						</ul>
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial/repo
+$ ls
+
+$ ls -a
+.  ..  .git
+$ cd .git
+$ ls
+branches  config  description  HEAD  hooks  info  objects  refs
+						</code>
+						</pre>
+						<a href="http://gitready.com/advanced/2009/03/23/whats-inside-your-git-directory.html">what's inside your .git directory</a>
+					</section>
+					<section>
+						<h1>git status</h1>
+						<ul>
+							<li>Was ist in meinem Repository los?</li>
+						</ul>
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial/repo
+$ git status
+Auf Branch master
+
+Initialer Commit
+
+nichts zu committen (Erstellen/Kopieren Sie Dateien und benutzen
+Sie "git add" zum Beobachten)
+
+						</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>git add</h1>
+						<ul>
+							<li>Eine Datei unter Versionskontrolle stellen</li>
+						</ul>
+						<pre>
+						<code class="hljs bash">
+$ cd ~/git-tutorial
+$ echo "Hallo Git" > file.txt
+$ git status
+Auf Branch master
+
+Initialer Commit
+
+Unbeobachtete Dateien:
+  (benutzen Sie "git add &lt;Datei&gt;...", um die Änderungen zum
+  Commit vorzumerken)
+
+	file.txt
+
+nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
+(benutzen Sie "git add" zum Beobachten)
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h1>git add …</h1>
+						<pre>
+						<code class="hljs bash">
+$ git add file.txt
+$ git status
+Auf Branch master
+
+Initialer Commit
+
+zum Commit vorgemerkte Änderungen:
+  (benutzen Sie "git rm --cached &lt;Datei&gt;..." zum Entfernen aus
+	  derStaging-Area)
+
+	neue Datei:     file.txt
+
+
+						</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>git commit</h1>
+						<pre>
+						<code class="hljs bash">
+$ git commit -m "Hallo Git"
+[master (Basis-Commit) 6b7add4] Hallo Git
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+$ git status
+Auf Branch master
+nichts zu committen, Arbeitsverzeichnis unverändert
+						</code>
+						</pre>
+						<canvas id="gitinitGraph"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitinitGraph",
+							   mode: "compact",
+							   orientation: "horizontal",
+							   reverseArrow: true
+							});
+						var master = gitGraph.branch("master").commit("Hallo Git");
+						});
+						</script>
+					</section>
+					<section>
+						<h1>git commit …</h1>
+						<pre>
+						<code class="hljs bash">
+$ echo "again" >> file.txt
+$ git status
+Auf Branch master
+Änderungen, die nicht zum Commit vorgemerkt sind:
+  (benutzen Sie "git add &lt;Datei&gt;...", um die Änderungen zum
+  Commit vorzumerken)
+  (benutzen Sie "git checkout -- &lt;Datei&gt;...", um die Änderungen
+  im Arbeitsverzeichnis zu verwerfen)
+
+	geändert:       file.txt
+
+keine Änderungen zum Commit vorgemerkt (benutzen Sie "git add"
+und/oder "git commit -a")
+
+						</code>
+						</pre>
+					</section>
+					<section>
+						<h1>git commit …</h1>
+						<pre>
+						<code class="hljs bash">
+$ git commit -m "again"
+[master 0a777cb] again
+ 1 file changed, 1 insertion(+)
+$ git status
+Auf Branch master
+nichts zu committen, Arbeitsverzeichnis unverändert
+						</code>
+						</pre>
+						<canvas id="gitcommitGraph"></canvas>
+						<script>
+						slidehooks.push(function () {
+							var gitGraph = new GitGraph({
+							   template: "meteor",
+							   elementId: "gitcommitGraph",
+							   mode: "compact",
+							   orientation: "horizontal",
+							   reverseArrow: true
+							});
+						var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
+						});
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>git log</h1>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>git clone</h1>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>branch</h1>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>git merge</h1>
+					</section>
+				</section>
+
+				<section>
+					<canvas id="gitGraph"></canvas>
+					<script>
+					slidehooks.push(function () {
+						var gitGraph = new GitGraph({
+						   template: "meteor",
+						   mode: "compact",
+						   orientation: "horizontal",
+						   reverseArrow: true
+						});
+
+						var master = gitGraph.branch("master").commit().commit();
+						var develop = gitGraph.branch("develop").commit();
+						master.commit();
+						develop.commit().commit();
+						develop.merge(master);
+					});
+					</script>
+				</section>
+				<section>
+					<ul>
+						<li><a href="http://ikke.info/git.from.bottom.up.pdf">Git from the bottom up</a></li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+		<!-- Lib for Git visualisation -->
+		<script src="bower_components/gitgraph.js/src/gitgraph.js"></script>
 
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
@@ -58,6 +392,13 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+
+			$(document).ready(function() {
+				for (var i = 0; i < slidehooks.length; i++) {
+					slidehooks[i]();
+				}
+			});
+
 		</script>
 	</body>
 </html>
