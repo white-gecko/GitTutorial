@@ -7,7 +7,7 @@
 		<title>Git Tutorium – WiSe 2016</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
 		<link rel="stylesheet" href="css/my.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -31,118 +31,73 @@
 			<div class="slides">
 				<section>
 					<h1>Versionsverwaltung<br/> und Git</h1>
-					<strong>Softwaretechnik Übung – WiSe 2016</strong><br/>
-					2016-12-16
+					<strong>Softwaretechnik Tutorium – WiSe 2017/2018</strong><br/>
+					2017-10-13
 					<pre><code class="hljs bash">$ git config --global user.name "Natanael Arndt"
 $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 					<span><a href="https://creativecommons.org/licenses/by-sa/2.0/">cc-by-sa</a></span>
+					<div ><a href="https://github.com/white-gecko/GitTutorial/tree/wise2016">wise2016</a></div>
 				</section>
-				<section>
-					<h2>Warum brauche ich eine Versionsverwaltung?</h2>
-					<ul>
-						<li>Protokollierung der Softwareentwicklung</li>
-						<li>Archivierung der Softwareversionen</li>
-						<li>Wiederherstellung eines beliebigen Entwicklungstands</li>
-						<li>Synchronisation des Entwicklungstands mit Kollegen</li>
-						<li>Verschiedene Entwicklungstände zum „ausprobieren“</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Lernziele der Heutigen Einheit</h2>
-					<ul>
-						<li></li>
-					</ul>
-				</section>
-				<section>
-					<h2>Geschichte: Lokaler Ansatz</h2>
-					<ul>
-						<li>Snapshots der Entwicklung liegen lokal vor</li>
-						<li>Es kann schnell auf eine beliebige Version zugegriffen werden</li>
-						<li>Versionen können verglichen werden</li>
-						<li class="fragment" data-fragment-index="2">Es ist aber nur eine lineare History vorhanden</li>
-						<li class="fragment" data-fragment-index="3">Kein Austausch mit Mitarbeitern</li>
-					</ul>
-					<canvas  class="fragment" data-fragment-index="1" id="versionGraph"></canvas>
-					<script>
-					slidehooks.push(function () {
-						var gitGraph = new GitGraph({
-						   elementId: "versionGraph",
-						   template: "meteor",
-						   mode: "compact",
-						   orientation: "horizontal",
-						   reverseArrow: true
-						});
+				<section data-markdown>
+					## Warum brauche ich eine Versionsverwaltung?
 
-						var master = gitGraph.branch("master").commit("Hallo").commit().commit().commit();
-					});
-					</script>
+					* Protokollierung der Softwareentwicklung
+					* Archivierung der Softwareversionen
+					* Wiederherstellung eines beliebigen Entwicklungstands
+					* Synchronisation des Entwicklungstands mit Kollegen
+					* Verschiedene Entwicklungstände zum „ausprobieren“
+				</section>
+				<section data-markdown>
+					## Lernziele für heute
+
+					* Git Repository anlegen
+					* Commits hinzufügen
+					* Änderungen hochladen
+
+					Note:
+					- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
 				</section>
 				<section>
-					<section>
-					<h2>Zentraler Ansatz</h2>
-					<ul>
-						<li>Snapshots oder Deltas werden an einen zentralen Server übertragen</li>
-						<li>Austausch mit Mitarbeitern</li>
-						<li>Zugriff auf Versionen ist etwas langsamer</li>
-						<li>Es muss ein Konsens hergestellt werden</li>
-						<li>Rudimentäre Unterstützung für Branches</li>
-						<li>Bsp. Concurrent Versions System (CVS), Subversion (SVN)</li>
-					</ul>
+					<section data-markdown>
+						## Geschichte: Lokaler Ansatz
+
+						* Versionen der Entwicklung liegen lokal vor
+						* Zugriff auf Versionen ist schnell
+						* Versionen können verglichen werden
+						* Kein Austausch mit Mitarbeitern
 					</section>
 					<section>
-					<h3>Subversion (SVN)</h3>
-					<ul>
-						<li>Commits: atomare Operationen</li>
-						<li>Branching: verzweigung der Versionen</li>
-						<li>Merging: Zusammenführung von verweigten Versionen</li>
-						<li>Tagging: Merkieren von bestimmten Versionen</li>
-						<li>Diff: vergleich zwischen Versionen</li>
-					</ul>
+						<h2>Geschichte: Zentraler Ansatz</h2>
+						<ul>
+							<li>Änderungen werden an einen zentralen Server übertragen</li>
+							<li>Austausch mit Mitarbeitern</li>
+							<li>Zugriff auf Versionen is langsamer</li>
+							<li>Es muss ein Konsens hergestellt werden</li>
+							<li>Rudimentäre Unterstützung für Branches</li>
+							<li>Bsp. Concurrent Versions System (CVS), Subversion (SVN)</li>
+						</ul>
 					</section>
 					<section>
-					<h3>Subversion (SVN)</h3>
-					<pre><code class="hljs bash">$ svnadmin create /tmp/svn/repo
-$ # … set "anon-access = write" in conf/svnserve.conf
-$ cd repo &amp;&amp; svnserve -d &amp;&amp; cd ..
-$ svn checkout svn://localhost/tmp/svn/repo workingcopy
-Ausgecheckt, Revision 0.
-$ cd workingcopy
-$ echo "Hallo" > file.txt
-$ svn add file.txt
-A         file.txt
-$ svn commit -m "Initial commit"
-Füge hinzu         file.txt
-Übertrage Daten .
-Revision 1 übertragen.</code></pre>
+						<h1>Geschichte: Verteilerter Ansatz</h1>
+						<ul>
+							<li>Es können mehrere Server existieren</li>
+							<li>Lokale Version beinhaltet die komplete Versionsgeschichte</li>
+							<li>Zugriff auf Versionen ist schnell</li>
+							<li>Es muss kein Konsens existieren</li>
+							<li>Beliebige Branches auf unterschiedlichen Systemen erlaubt</li>
+							<li>Bsp. Mercurial, Bazar, …, Git</li>
+						</ul>
 					</section>
 					<section>
-					<h3>Subversion (SVN)</h3>
-					<pre><code class="hljs bash">$ svn checkout … # download aktuelle Version
-$ svn add …      # setze Datei unter Versionsverwaltung
-$ svn commit …   # übertrage neue Version zum Server
-$ svn update     # aktualisiere Lokale Version</code></pre>
+						<h1>Git</h1>
+						<ul>
+							<li>2005 von Linus Torvalds begonnen</li>
+							<li>… um BitKeeper für die Kernel Entwicklung zu ersetzen</li>
+							<li>Aktuell sehr weit verbreitet: GitHut, GitLab, Bitbucket, …</li>
+							<li>Version 2.14.2 (2017-09-22)</li>
+							<li><a href="https://www.git-scm.com/">https://www.git-scm.com/</a></li>
+						</ul>
 					</section>
-				</section>
-				<section>
-					<h1>Verteilerter Ansatz</h1>
-					<ul>
-						<li>Es können mehere Server existieren</li>
-						<li>Lokale Version beinhaltet die komplete Versionsgeschichte</li>
-						<li>Zugriff auf Versionen ist schnell</li>
-						<li>Es muss kein Konsens existieren</li>
-						<li>Beliebige Branches auf unterschiedlichen Systemen erlaubt</li>
-						<li>Bsp. Mercurial, Bazar, …, Git</li>
-					</ul>
-				</section>
-				<section>
-					<h1>Git</h1>
-					<ul>
-						<li>2005 von Linus Torvalds begonnen</li>
-						<li>… um BitKeeper für die Kernel Entwicklung zu ersetzen</li>
-						<li>Aktuell sehr weit verbreitet: GitHut, GitLab, Bitbucket, …</li>
-						<li>Version 2.11.0 (2016-11-29)</li>
-						<li><a href="https://www.git-scm.com/">https://www.git-scm.com/</a></li>
-					</ul>
 				</section>
 				<section>
 					<section>
@@ -325,7 +280,9 @@ Initialisierte leeres Git-Repository in
 /home/natanael/git-tutorial/remote-repo
 $ ls -a
 .   branches  description  hooks  objects
-..  config    HEAD         info   refs</code></pre>
+..  config    HEAD         info   refs
+$ git log
+fatal: bad default revision 'HEAD'</code></pre>
 					</section>
 					<section>
 						<h1>git push (und git remote)</h1>
@@ -346,10 +303,10 @@ Total 6 (delta 0), reused 0 (delta 0)
 To ../remote-repo
  * [new branch]      master -> master</code></pre>
 
-<span style="font-size: .8em">
- <em>--set-upstream</em> bzw. <em>-u</em> ist nur einmal notwendig, um den Branch dem remote Vranch zuzuordnen.
- Alternativ <em>git branch --set-upstream-to=anderes/master</em> .
-</span>
+<p style="font-size: .6em; line-height: 1em">
+ <em>--set-upstream</em> bzw. <em>-u</em> ist nur einmal notwendig, um den Branch dem remote Branch zuzuordnen.
+ Alternativ <em>git branch --set-upstream-to=anderes/master</em>.
+</p>
 					</section>
 					<section>
 						<h1>git push (und git remote)</h1>
@@ -974,10 +931,11 @@ Hinweis: für weitere Details.</code></pre>
 		<script src="js/reveal.js"></script>
 
 		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
+			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
