@@ -36,7 +36,10 @@
 	<pre><code class="hljs bash">$ git config --global user.name "Natanael Arndt"
 $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 	<span><a href="https://creativecommons.org/licenses/by-sa/2.0/">cc-by-sa</a></span>
-	<div ><a href="https://github.com/white-gecko/GitTutorial/tree/wise2016">wise2016</a></div>
+	<div class="tags">
+		<a href="https://github.com/white-gecko/GitTutorial/tree/wise2016">wise2016</a>
+		<a href="https://github.com/white-gecko/GitTutorial/tree/master">master</a>
+	</div>
 </section>
 <section data-markdown>
 	## Warum brauche ich eine Versionsverwaltung?
@@ -48,11 +51,40 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 	* Verschiedene Entwicklungstände zum „ausprobieren“
 </section>
 <section data-markdown>
+	## Systemvoraussetzungen
+
+	* Welches Betriebssystem habt ihr?
+	    * Linux, Windows, MacOS, BSD, …
+	* Welche IDEs verwendet ihr?
+	    * Atom, Eclipse, Sublime, …
+	* Habt ihr schon Git installiert?
+	    * Wichtig direkt auf der Konsole: …
+</section>
+
+<section data-markdown>
+	## Installation
+
+	```
+	you@linux:~$ apt-get install git  # Debian GNU/Linux u.ä.
+	you@linux:~$ yum install git-core # Yellowdog, Fedora, openSUSE, …
+	you@macos:~$ brew install git
+	C:\> # Windows: http://msysgit.github.com/
+	```
+
+</section>
+<section data-markdown>
+	* [Lektion 1](#lektion-1) (2017-10-13)
+	* [Lektion 2](#lektion-2) (2017-10-20)
+</section>
+<section data-markdown id="lektion-1">
+	# Lektion 1
 	## Lernziele für heute
 
 	* Git Repository anlegen
+	* Dateien unter Versionskontrolle stellen
 	* Commits hinzufügen
-	* Änderungen hochladen
+	* Änderungen übertragen
+	* Git Lab Repository anlegen
 
 	Note:
 	- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
@@ -611,6 +643,42 @@ file2.txt | 2 +-
 $ ls -a
 .  ..  file2.txt  file.txt  .git</code></pre>
 	</section>
+</section>
+
+<section data-markdown>
+	## Git Lab
+	![](img/gitlab-1.png)
+</section>
+<section data-markdown>
+	![](img/gitlab-2.png)
+</section>
+<section data-markdown>
+	![](img/gitlab-3.png)
+</section>
+<section data-markdown>
+	![](img/gitlab-4.png)
+</section>
+<section data-markdown>
+	![](img/gitlab-5.png)
+</section>
+<section data-markdown>
+	![](img/gitlab-6.png)
+</section>
+<section data-markdown>
+	![](img/gitlab-7.png)
+</section>
+
+<section data-markdown id="lektion-2">
+	# Lektion 2
+	## Lernziele für heute
+
+	* Branching
+	* Merging
+	* Merge Konflikte
+	* Git Branching Modells
+
+	Note:
+	- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
 </section>
 
 <section>

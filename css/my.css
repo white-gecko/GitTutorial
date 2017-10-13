@@ -1,2 +1,10 @@
 .reveal h1 {
   font-size: 2em; }
+
+.tags a {
+    font-size: .6em ;
+    background-color: lightblue;
+    padding: .2em 1em ;
+    margin: .2em 0em ;
+    border-radius: .3em;
+}
