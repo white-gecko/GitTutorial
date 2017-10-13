@@ -35,11 +35,15 @@
 	2017-10-13
 	<pre><code class="hljs bash">$ git config --global user.name "Natanael Arndt"
 $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
+	<a href="https://white-gecko.github.io/GitTutorial">https://white-gecko.github.io/GitTutorial</a><br />
 	<span><a href="https://creativecommons.org/licenses/by-sa/2.0/">cc-by-sa</a></span>
 	<div class="tags">
 		<a href="https://github.com/white-gecko/GitTutorial/tree/wise2016">wise2016</a>
 		<a href="https://github.com/white-gecko/GitTutorial/tree/master">master</a>
 	</div>
+</section>
+<section data-markdown>
+	https://white-gecko.github.io/GitTutorial
 </section>
 <section data-markdown>
 	## Warum brauche ich eine Versionsverwaltung?
@@ -49,6 +53,8 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 	* Wiederherstellung eines beliebigen Entwicklungstands
 	* Synchronisation des Entwicklungstands mit Kollegen
 	* Verschiedene Entwicklungstände zum „ausprobieren“
+
+	https://white-gecko.github.io/GitTutorial
 </section>
 <section data-markdown>
 	## Systemvoraussetzungen
@@ -59,6 +65,8 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 	    * Atom, Eclipse, Sublime, …
 	* Habt ihr schon Git installiert?
 	    * Wichtig direkt auf der Konsole: …
+
+	https://white-gecko.github.io/GitTutorial
 </section>
 
 <section data-markdown>
@@ -71,10 +79,13 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 	C:\> # Windows: http://msysgit.github.com/
 	```
 
+	https://white-gecko.github.io/GitTutorial
 </section>
 <section data-markdown>
 	* [Lektion 1](#lektion-1) (2017-10-13)
 	* [Lektion 2](#lektion-2) (2017-10-20)
+
+	https://white-gecko.github.io/GitTutorial
 </section>
 <section data-markdown id="lektion-1">
 	# Lektion 1
@@ -228,19 +239,7 @@ create mode 100644 file.txt
 $ git status
 Auf Branch master
 nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
-		<canvas id="gitinitGraph"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitinitGraph",
-			   mode: "extended",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-		var master = gitGraph.branch("master").commit("Hallo Git");
-		});
-		</script>
+		<img height="100em" src="img/git/commits-A.svg" />
 	</section>
 	<section>
 		<h1>git commit …</h1>
@@ -266,19 +265,7 @@ und/oder "git commit -a")</code></pre>
 $ git status
 Auf Branch master
 nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
-		<canvas id="gitcommitGraph"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitcommitGraph",
-			   mode: "extended",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
-		});
-		</script>
+		<img height="100em" src="img/git/commits-B.svg" />
 	</section>
 </section>
 
@@ -376,19 +363,8 @@ $ ls -a
 $ git remote -v
 origin	/home/natanael/git-tutorial/remote-repo (fetch)
 origin	/home/natanael/git-tutorial/remote-repo (push)</code></pre>
-		<canvas id="gitcloneGraphA"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitcloneGraphA",
-			   mode: "extended",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>git clone und ein neuer Beitrag</h1>
@@ -406,19 +382,8 @@ file2.txt
 
 nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
 (benutzen Sie "git add" zum Beobachten)</code></pre>
-		<canvas id="gitcloneGraphB"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitcloneGraphB",
-			   mode: "extended",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>… git add …</h1>
@@ -432,19 +397,8 @@ zum Commit vorgemerkte Änderungen:
 der Staging-Area)
 
 neue Datei:     file2.txt</code></pre>
-		<canvas id="gitcloneGraphC"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitcloneGraphC",
-			   mode: "extended",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>… git commit …</h1>
@@ -458,29 +412,8 @@ Auf Branch master
 Ihr Branch ist vor 'origin/master' um 1 Commit.
 (benutzen Sie "git push", um lokale Commits zu publizieren)
 nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
-		<canvas id="gitcloneGraphD"></canvas>
-		<canvas id="gitremoteGraphD"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitcloneGraphD",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-			var gitRemoteGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitremoteGraphD",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-C.svg" />
 	</section>
 	<section>
 		<h1>… git push</h1>
@@ -494,29 +427,8 @@ Total 3 (delta 0), reused 0 (delta 0)
 To /home/natanael/git-tutorial/remote-repo
 0a777cb..a7155b7  master -> master
 $ git status</code></pre>
-		<canvas id="gitcloneGraphE"></canvas>
-		<canvas id="gitremoteGraphE"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitcloneGraphE",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-			var gitRemoteGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitremoteGraphE",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-C.svg" />
 	</section>
 </section>
 
@@ -535,29 +447,8 @@ Von /home/natanael/git-tutorial/remote-repo
 0a777cb..a7155b7  master     -> origin/master
 $ ls -a
 .  ..  file.txt  .git</code></pre>
-		<canvas id="gitfetchGraphF"></canvas>
-		<canvas id="gitremoteGraphF"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitfetchGraphF",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-			var gitRemoteGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitremoteGraphF",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
-		var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>git fetch und git merge</h1>
@@ -575,29 +466,8 @@ Fast-forward
 file2.txt | 1 +
 1 file changed, 1 insertion(+)
 create mode 100644 file2.txt</code></pre>
-		<canvas id="gitfetchGraphG"></canvas>
-		<canvas id="gitremoteGraphG"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitfetchGraphG",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-			var gitRemoteGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitremoteGraphG",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-C.svg" />
 	</section>
 	<section>
 		<h1>git fetch und git merge</h1>
@@ -608,29 +478,8 @@ Ihr Branch ist auf dem selben Stand wie 'origin/master'.
 nichts zu committen, Arbeitsverzeichnis unverändert
 $ ls -a
 .  ..  file2.txt  file.txt  .git</code></pre>
-		<canvas id="gitfetchGraphG"></canvas>
-		<canvas id="gitremoteGraphG"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitfetchGraphG",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-			var gitRemoteGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitremoteGraphG",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		var remote = gitRemoteGraph.branch("master").commit("Hallo Git").commit("again").commit("Ein neuer Beitrag");
-		});
-		</script>
+		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
+		Lokal: <img height="100em" src="img/git/commits-C.svg" />
 	</section>
 	<section>
 		<h1>git fetch + git merge<br/>= git pull</h1>
