@@ -72,6 +72,7 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 <section data-markdown>
 	## Installation
 
+	[https://git-scm.com/book/de/v1/Los-geht’s-Git-installieren](https://git-scm.com/book/de/v1/Los-geht%E2%80%99s-Git-installieren)
 	```
 	you@linux:~$ apt-get install git  # Debian GNU/Linux u.ä.
 	you@linux:~$ yum install git-core # Yellowdog, Fedora, openSUSE, …
@@ -148,7 +149,9 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 		<ul>
 			<li>Initialisieren eines neuen leeren Repositories</li>
 		</ul>
-		<pre><code class="hljs bash">$ cd ~/git-tutorial
+		<pre><code class="hljs bash">$ cd
+$ mkdir git-tutorial
+$ cd ~/git-tutorial
 $ git init repo
 Initialisierte leeres Git-Repository in
 /home/natanael/git-tutorial/repo/.git/</code></pre>
@@ -255,7 +258,8 @@ im Arbeitsverzeichnis zu verwerfen)
 geändert:       file.txt
 
 keine Änderungen zum Commit vorgemerkt (benutzen Sie "git add"
-und/oder "git commit -a")</code></pre>
+und/oder "git commit -a")
+$ git add file.txt</code></pre>
 	</section>
 	<section>
 		<h1>git commit …</h1>
@@ -294,9 +298,10 @@ Hallo Git</code></pre>
 			<li>Dient zur aktiven Übertragung eines Branches an ein entferntes Repository</li>
 		</ul>
 		<pre><code class="hljs bash">$ cd ~/git-tutorial/remote-repo
-$ git init --bare
+$ git init --bare remote-repo
 Initialisierte leeres Git-Repository in
 /home/natanael/git-tutorial/remote-repo
+$ cd remote-repo
 $ ls -a
 .   branches  description  hooks  objects
 ..  config    HEAD         info   refs
@@ -363,8 +368,8 @@ $ ls -a
 $ git remote -v
 origin	/home/natanael/git-tutorial/remote-repo (fetch)
 origin	/home/natanael/git-tutorial/remote-repo (push)</code></pre>
-		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-B.svg" />
+		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="70em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>git clone und ein neuer Beitrag</h1>
@@ -382,8 +387,8 @@ file2.txt
 
 nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
 (benutzen Sie "git add" zum Beobachten)</code></pre>
-		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-B.svg" />
+		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="70em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>… git add …</h1>
@@ -397,8 +402,8 @@ zum Commit vorgemerkte Änderungen:
 der Staging-Area)
 
 neue Datei:     file2.txt</code></pre>
-		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-B.svg" />
+		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="70em" src="img/git/commits-B.svg" />
 	</section>
 	<section>
 		<h1>… git commit …</h1>
@@ -412,8 +417,8 @@ Auf Branch master
 Ihr Branch ist vor 'origin/master' um 1 Commit.
 (benutzen Sie "git push", um lokale Commits zu publizieren)
 nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
-		Remote: <img height="100em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-C.svg" />
+		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
+		Lokal: <img height="70em" src="img/git/commits-C.svg" />
 	</section>
 	<section>
 		<h1>… git push</h1>
@@ -427,8 +432,8 @@ Total 3 (delta 0), reused 0 (delta 0)
 To /home/natanael/git-tutorial/remote-repo
 0a777cb..a7155b7  master -> master
 $ git status</code></pre>
-		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-C.svg" />
+		Remote: <img height="70em" src="img/git/commits-C.svg" /> <br/>
+		Lokal: <img height="70em" src="img/git/commits-C.svg" />
 	</section>
 </section>
 
