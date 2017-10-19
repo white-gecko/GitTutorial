@@ -73,7 +73,7 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 	## Installation
 
 	[https://git-scm.com/book/de/v1/Los-geht’s-Git-installieren](https://git-scm.com/book/de/v1/Los-geht%E2%80%99s-Git-installieren)
-	```
+	```bash
 	you@linux:~$ apt-get install git  # Debian GNU/Linux u.ä.
 	you@linux:~$ yum install git-core # Yellowdog, Fedora, openSUSE, …
 	you@macos:~$ brew install git
@@ -377,9 +377,182 @@ Hallo Git</code></pre>
 	- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
 </section>
 
-<section data-markdown>
-	![](img/gitlab-4.png)
+<section>
+	<section data-markdown>
+		## Wiederholung
+
+		* git init
+		* git status
+		* git commit
+		* git log
+		* git push
+	</section>
+	<section data-markdown>
+		# Git Konfiguration
+
+		* Vor dem ersten Commit muss der Namen und die E-Mail des commiters konfiguriert werden
+
+		```bash
+		$ git config --global user.name "Natanael Arndt"
+		$ git config --global user.email "arndt@informatik.uni-leipzig.de"
+		```
+
+		Überprüfen mit:
+		```bash
+		$ git config --global user.name
+		$ git config --global user.email
+		```
+	</section>
+	<section data-markdown>
+		# git init
+
+		* Initialisieren eines neuen leeren Repositories
+
+		```bash
+		$ cd
+		$ mkdir git-tutorial
+		$ cd ~/git-tutorial
+		$ git init repo
+		Initialisierte leeres Git-Repository in
+		/home/natanael/git-tutorial/repo/.git/
+		```
+	</section>
+	<section data-markdown>
+		# git status
+
+		* Was ist in meinem Repository los?
+
+		```bash
+		$ cd ~/git-tutorial/repo
+		$ git status
+		Auf Branch master
+
+		Initialer Commit
+
+		nichts zu committen (Erstellen/Kopieren Sie Dateien und benutzen
+		Sie "git add" zum Beobachten)
+		```
+	</section>
+	<section data-markdown>
+		# git add
+
+		* Eine Datei unter Versionskontrolle stellen
+
+		```
+		$ cd ~/git-tutorial/repo
+		$ echo "Hallo Git" > file.txt
+		$ git status
+		Auf Branch master
+
+		Initialer Commit
+
+		Unbeobachtete Dateien:
+		(benutzen Sie "git add &lt;Datei&gt;...", um die Änderungen zum
+		Commit vorzumerken)
+
+		file.txt
+
+		nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
+		(benutzen Sie "git add" zum Beobachten)
+		```
+	</section>
+	<section data-markdown>
+		# git add …
+
+		```bash
+		$ git add file.txt
+		$ git status
+		Auf Branch master
+
+		Initialer Commit
+
+		zum Commit vorgemerkte Änderungen:
+		(benutzen Sie "git rm --cached &lt;Datei&gt;..." zum Entfernen aus
+		derStaging-Area)
+
+		neue Datei:     file.txt
+		```
+	</section>
+
+	<section data-markdown>
+		<script type="text/template">
+		# git commit
+
+		```bash
+		$ git commit -m "Hallo Git"
+		[master (Basis-Commit) 6b7add4] Hallo Git
+		1 file changed, 1 insertion(+)
+		create mode 100644 file.txt
+		$ git status
+		Auf Branch master
+		nichts zu committen, Arbeitsverzeichnis unverändert
+		```
+		![](img/git/commits-A.svg)<!-- .element: style="height: 2em" -->
+		</script>
+	</section>
+	<section data-markdown>
+		<script type="text/template">
+		# git commit …
+
+		```bash
+		$ echo "again" >> file.txt
+		$ git add file.txt
+		$ git commit -m "again"
+		[master 0a777cb] again
+		1 file changed, 1 insertion(+)
+		$ git status
+		Auf Branch master
+		nichts zu committen, Arbeitsverzeichnis unverändert
+		```
+		![](img/git/commits-B.svg)<!-- .element: style="height: 2em" -->
+		</script>
+	</section>
+	<section data-markdown>
+		# git log
+
+		```bash
+		$ git log
+		commit 0a777cba46cd556a1246d033e0b11dedbfee6815
+		Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
+		Date:   Fri Dec 16 01:55:56 2016 +0100
+
+		again
+
+		commit 6b7add4815e9c99d1f3f44c03cea58339b408f4d
+		Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
+		Date:   Fri Dec 16 01:49:44 2016 +0100
+
+		Hallo Git
+		```
+	</section>
+	<section data-markdown>
+		![](img/gitlab-4.png)
+	</section>
+	<section>
+		<h1>git push (und git remote)</h1>
+		<ul>
+			<li>Zur Übertragung muss das entfernte Repository als <em>remote</em> eingetragen werden</li>
+		</ul>
+		<pre><code class="hljs bash">$ git remote add gitlab ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
+$ git remote -v
+gitlab	ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git (fetch)
+gitlab	ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git (push)
+$ git push --set-upstream gitlab master
+Zähle Objekte: 6, Fertig.
+Delta compression using up to 4 threads.
+Komprimiere Objekte: 100% (2/2), Fertig.
+Schreibe Objekte: 100% (6/6), 444 bytes | 0 bytes/s, Fertig.
+Total 6 (delta 0), reused 0 (delta 0)
+To ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
+* [new branch]      master -> master</code></pre>
+
+<p style="font-size: .6em; line-height: 1em">
+<em>--set-upstream</em> bzw. <em>-u</em> ist nur einmal notwendig, um den Branch dem remote Branch zuzuordnen.
+Alternativ <em>git branch --set-upstream-to=anderes/master</em>.
+</p>
+	</section>
 </section>
+
 
 <section>
 	<section>
