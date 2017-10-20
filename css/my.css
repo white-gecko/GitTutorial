@@ -8,3 +8,9 @@
     margin: .2em 0em ;
     border-radius: .3em;
 }
+
+.reveal section img {
+    border: none;
+    background: none;
+    box-shadow: none;
+}

@@ -84,7 +84,9 @@ $ git config --global user.email "arndt@informatik.uni-leipzig.de"</code></pre>
 </section>
 <section data-markdown>
 	* [Lektion 1](#lektion-1) (2017-10-13)
+	    * [Wiederholung Lektion 1](#wdh-lektion-1) (2017-10-20)
 	* [Lektion 2](#lektion-2) (2017-10-20)
+	* [Lektion 3](#lektion-3)
 
 	https://white-gecko.github.io/GitTutorial
 </section>
@@ -362,24 +364,10 @@ Hallo Git</code></pre>
 	![](img/gitlab-3.png)
 </section>
 
-<section data-markdown id="lektion-2">
-	# Lektion 2
-	## Lernziele für heute
 
-	* Repositories und Änderungen Herunterladen
-	* Mit anderen Teammitgliedern zusammenarbeiten
-	* Branching
-	* Merging
-	* Merge Konflikte
-	* Git Branching Modells
-
-	Note:
-	- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
-</section>
-
-<section>
+<section id="wdh-lektion-1">
 	<section data-markdown>
-		## Wiederholung
+		## Wiederholung Lektion 1
 
 		* git init
 		* git status
@@ -439,7 +427,7 @@ Hallo Git</code></pre>
 		* Eine Datei unter Versionskontrolle stellen
 
 		```
-		$ cd ~/git-tutorial/repo
+		$ # PWD=~/git-tutorial/repo
 		$ echo "Hallo Git" > file.txt
 		$ git status
 		Auf Branch master
@@ -460,6 +448,7 @@ Hallo Git</code></pre>
 		# git add …
 
 		```bash
+		$ # PWD=~/git-tutorial/repo
 		$ git add file.txt
 		$ git status
 		Auf Branch master
@@ -479,6 +468,7 @@ Hallo Git</code></pre>
 		# git commit
 
 		```bash
+		$ # PWD=~/git-tutorial/repo
 		$ git commit -m "Hallo Git"
 		[master (Basis-Commit) 6b7add4] Hallo Git
 		1 file changed, 1 insertion(+)
@@ -495,6 +485,7 @@ Hallo Git</code></pre>
 		# git commit …
 
 		```bash
+		$ # PWD=~/git-tutorial/repo
 		$ echo "again" >> file.txt
 		$ git add file.txt
 		$ git commit -m "again"
@@ -511,6 +502,7 @@ Hallo Git</code></pre>
 		# git log
 
 		```bash
+		$ # PWD=~/git-tutorial/repo
 		$ git log
 		commit 0a777cba46cd556a1246d033e0b11dedbfee6815
 		Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
@@ -523,6 +515,7 @@ Hallo Git</code></pre>
 		Date:   Fri Dec 16 01:49:44 2016 +0100
 
 		Hallo Git
+		$ # aus git log kommt man mit 'q' raus
 		```
 	</section>
 	<section data-markdown>
@@ -533,7 +526,8 @@ Hallo Git</code></pre>
 		<ul>
 			<li>Zur Übertragung muss das entfernte Repository als <em>remote</em> eingetragen werden</li>
 		</ul>
-		<pre><code class="hljs bash">$ git remote add gitlab ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
+		<pre><code class="hljs bash"># PWD=~/git-tutorial/repo
+$ git remote add gitlab ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
 $ git remote -v
 gitlab	ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git (fetch)
 gitlab	ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git (push)
@@ -541,7 +535,7 @@ $ git push --set-upstream gitlab master
 Zähle Objekte: 6, Fertig.
 Delta compression using up to 4 threads.
 Komprimiere Objekte: 100% (2/2), Fertig.
-Schreibe Objekte: 100% (6/6), 444 bytes | 0 bytes/s, Fertig.
+Schreibe Objekte: 100% (6/6), 442 bytes | 0 bytes/s, Fertig.
 Total 6 (delta 0), reused 0 (delta 0)
 To ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
 * [new branch]      master -> master</code></pre>
@@ -553,6 +547,19 @@ Alternativ <em>git branch --set-upstream-to=anderes/master</em>.
 	</section>
 </section>
 
+<section data-markdown id="lektion-2">
+	# Lektion 2
+	## Lernziele für heute
+
+	* Repositories und Änderungen Herunterladen
+	* Branching
+	* Merging
+	* Merge Konflikte
+	* Mit anderen Teammitgliedern zusammenarbeiten
+
+	Note:
+	- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
+</section>
 
 <section>
 	<section>
@@ -562,22 +569,48 @@ Alternativ <em>git branch --set-upstream-to=anderes/master</em>.
 		</ul>
 
 		<pre><code class="hljs bash">$ cd ~/git-tutorial/
-$ git clone remote-repo/ local/
+$ git clone ifigit@git.….de:arndt/git-tutorial.git local/
 Klone nach 'local'...
-Fertig.
+remote: Zähle Objekte: 6, Fertig.
+remote: Komprimiere Objekte: 100% (2/2), Fertig.
+remote: Total 6 (delta 0), reused 0 (delta 0)
+Empfange Objekte: 100% (6/6), Fertig.
+Prüfe Konnektivität... Fertig.
 $ cd local/
 $ ls -a
 .  ..  file.txt  .git
 $ git remote -v
-origin	/home/natanael/git-tutorial/remote-repo (fetch)
-origin	/home/natanael/git-tutorial/remote-repo (push)</code></pre>
-		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="70em" src="img/git/commits-B.svg" />
+origin	ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git (fetch)
+origin	ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git (push)</code></pre>
+	</section>
+	<section data-markdown>
+		<script type="text/template">
+		# git clone und git log
+
+		```bash
+		$ # PWD=~/git-tutorial/local
+		$ git log
+		commit 0a777cba46cd556a1246d033e0b11dedbfee6815
+		Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
+		Date:   Fri Dec 16 01:55:56 2016 +0100
+
+		again
+
+		commit 6b7add4815e9c99d1f3f44c03cea58339b408f4d
+		Author: Natanael Arndt &lt;arndt@informatik.uni-leipzig.de&gt;
+		Date:   Fri Dec 16 01:49:44 2016 +0100
+
+		Hallo Git
+		$ # aus git log kommt man mit 'q' raus
+		```
+
+		![](img/git/clone.svg) <!-- .element: style="height: 3em" -->
+		</script>
 	</section>
 	<section>
 		<h1>git clone und ein neuer Beitrag</h1>
 
-		<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/local
 $ echo "Beitrag" > file2.txt
 $ git status
 Auf Branch master
@@ -590,13 +623,13 @@ file2.txt
 
 nichts zum Commit vorgemerkt, aber es gibt unbeobachtete Dateien
 (benutzen Sie "git add" zum Beobachten)</code></pre>
-		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="70em" src="img/git/commits-B.svg" />
+		<img height="150em" src="img/git/clone.svg" />
 	</section>
 	<section>
 		<h1>… git add …</h1>
 
-		<pre><code class="hljs bash">$ git add file2.txt
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/local
+$ git add file2.txt
 $ git status
 Auf Branch master
 Ihr Branch ist auf dem selben Stand wie 'origin/master'.
@@ -605,13 +638,13 @@ zum Commit vorgemerkte Änderungen:
 der Staging-Area)
 
 neue Datei:     file2.txt</code></pre>
-		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="70em" src="img/git/commits-B.svg" />
+		<img height="150em" src="img/git/clone.svg" />
 	</section>
 	<section>
 		<h1>… git commit …</h1>
 
-		<pre><code class="hljs bash">$ git commit -m "Ein neuer Beitrag"
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/local
+$ git commit -m "Ein neuer Beitrag"
 [master a7155b7] ein neuer Beitrag
 1 file changed, 1 insertion(+)
 create mode 100644 file2.txt
@@ -620,78 +653,107 @@ Auf Branch master
 Ihr Branch ist vor 'origin/master' um 1 Commit.
 (benutzen Sie "git push", um lokale Commits zu publizieren)
 nichts zu committen, Arbeitsverzeichnis unverändert</code></pre>
-		Remote: <img height="70em" src="img/git/commits-B.svg" /> <br/>
-		Lokal: <img height="70em" src="img/git/commits-C.svg" />
+		<img height="150em" src="img/git/clone-new-commit.svg" />
 	</section>
 	<section>
 		<h1>… git push</h1>
 
-		<pre><code class="hljs bash">$ git push
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/local
+$ git push
 Zähle Objekte: 3, Fertig.
 Delta compression using up to 4 threads.
 Komprimiere Objekte: 100% (2/2), Fertig.
-Schreibe Objekte: 100% (3/3), 279 bytes | 0 bytes/s, Fertig.
+Schreibe Objekte: 100% (3/3), 280 bytes | 0 bytes/s, Fertig.
 Total 3 (delta 0), reused 0 (delta 0)
-To /home/natanael/git-tutorial/remote-repo
+To ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
 0a777cb..a7155b7  master -> master
 $ git status</code></pre>
-		Remote: <img height="70em" src="img/git/commits-C.svg" /> <br/>
-		Lokal: <img height="70em" src="img/git/commits-C.svg" />
+		<img height="150em" src="img/git/push.svg" />
 	</section>
 </section>
 
 <section>
-	<section>
+	<section data-transition="slide-in fade-out">
 		<h1>git fetch</h1>
-		<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+		<pre><code class="hljs bash">$ cd ~/git-tutorial/repo/
 $ ls -a
 .  ..  file.txt  .git
-$ git fetch anderes
+$ git fetch gitlab
 remote: Zähle Objekte: 3, Fertig.
 remote: Komprimiere Objekte: 100% (2/2), Fertig.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Entpacke Objekte: 100% (3/3), Fertig.
-Von /home/natanael/git-tutorial/remote-repo
-0a777cb..a7155b7  master     -> origin/master
+Von ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
+0a777cb..a7155b7  master     -> gitlab/master
 $ ls -a
 .  ..  file.txt  .git</code></pre>
-		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-B.svg" />
+		<img height="120em" src="img/git/fetch.svg" />
 	</section>
-	<section>
+	<section data-transition="fade-in slide-out">
+		<h1>git fetch</h1>
+		<pre><code class="hljs bash">$ cd ~/git-tutorial/repo/
+$ ls -a
+.  ..  file.txt  .git
+$ git fetch gitlab
+remote: Zähle Objekte: 3, Fertig.
+remote: Komprimiere Objekte: 100% (2/2), Fertig.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Entpacke Objekte: 100% (3/3), Fertig.
+Von ifigit@git.informatik.uni-leipzig.de:arndt/git-tutorial.git
+0a777cb..a7155b7  master     -> gitlab/master
+$ ls -a
+.  ..  file.txt  .git</code></pre>
+		<img height="120em" src="img/git/fetch2.svg" />
+	</section>
+	<section data-transition="slide-in fade-out">
 		<h1>git fetch und git merge</h1>
-		<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/repo
 $ git status
 Auf Branch master
-Ihr Branch ist zu 'origin/master' um 1 Commit hinterher, und kann
+Ihr Branch ist zu 'gitlab/master' um 1 Commit hinterher, und kann
 vorgespult werden.
 (benutzen Sie "git pull", um Ihren lokalen Branch zu
 aktualisieren)
 nichts zu committen, Arbeitsverzeichnis unverändert
-$ git merge anderes/master
+$ git merge gitlab/master
 Aktualisiere 0a777cb..a7155b7
 Fast-forward
 file2.txt | 1 +
 1 file changed, 1 insertion(+)
 create mode 100644 file2.txt</code></pre>
-		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-C.svg" />
+		<img height="120em" src="img/git/fetch2.svg" />
+	</section>
+	<section data-transition="fade-in slide-out">
+		<h1>git fetch und git merge</h1>
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/repo
+$ git status
+Auf Branch master
+Ihr Branch ist zu 'gitlab/master' um 1 Commit hinterher, und kann
+vorgespult werden.
+(benutzen Sie "git pull", um Ihren lokalen Branch zu
+aktualisieren)
+nichts zu committen, Arbeitsverzeichnis unverändert
+$ git merge gitlab/master
+Aktualisiere 0a777cb..a7155b7
+Fast-forward
+file2.txt | 1 +
+1 file changed, 1 insertion(+)
+create mode 100644 file2.txt</code></pre>
+		<img height="120em" src="img/git/push.svg" />
 	</section>
 	<section>
 		<h1>git fetch und git merge</h1>
-		<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/repo
 $ git status
 Auf Branch master
-Ihr Branch ist auf dem selben Stand wie 'origin/master'.
+Ihr Branch ist auf dem selben Stand wie 'gitlab/master'.
 nichts zu committen, Arbeitsverzeichnis unverändert
 $ ls -a
 .  ..  file2.txt  file.txt  .git</code></pre>
-		Remote: <img height="100em" src="img/git/commits-C.svg" /> <br/>
-		Lokal: <img height="100em" src="img/git/commits-C.svg" />
 	</section>
 	<section>
 		<h1>git fetch + git merge<br/>= git pull</h1>
-		<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/repo
 $ git pull
 Aktualisiere a7155b7..910e6f9
 Fast-forward
@@ -699,24 +761,6 @@ file2.txt | 2 +-
 1 file changed, 1 insertion(+), 1 deletion(-)
 $ ls -a
 .  ..  file2.txt  file.txt  .git</code></pre>
-	</section>
-</section>
-
-<section>
-	<section data-markdown>
-		# Zusammenarbeiten mit GitLab
-	</section>
-	<section data-markdown>
-		![](img/gitlab-4.png)
-	</section>
-	<section data-markdown>
-		![](img/gitlab-5.png)
-	</section>
-	<section data-markdown>
-		![](img/gitlab-6.png)
-	</section>
-	<section data-markdown>
-		![](img/gitlab-7.png)
 	</section>
 </section>
 
@@ -737,32 +781,12 @@ $ git commit -m "beitrag auf master"
 [master 3ff104e] beitrag auf master
 1 file changed, 1 insertion(+)
 </code></pre>
-		<canvas id="gitbranchGraph"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitbranchGraph",
-			   mode: "compact",
-			   orientation: "horizontal",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git")
-		.commit("again")
-		.commit({
-			message: "Ein neuer Beitrag",
-			tag: "feature",
-		}).commit({
-			message: "beitrag auf master",
-			dotColor: "white",
-			tag: "master (hier sind wir)"});
-		});
-		</script>
+		<img height="120em" src="img/git/branch-master.svg" />
 	</section>
 	<section>
 		<h1>branch</h1>
-		<pre><code class="hljs bash">$ git checkout feature
+		<pre><code class="hljs bash">$ # PWD=~/git-tutorial/local
+$ git checkout feature
 $ git branch
 * feature
 master
@@ -772,83 +796,32 @@ $ git commit -m "beitrag auf feature"
 [master 3ff104e] beitrag auf master
 1 file changed, 1 insertion(+)
 </code></pre>
-		<canvas id="gitbranchGraphB"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitbranchGraphB",
-			   mode: "compact",
-			   orientation: "horizontal",
-			   reverseArrow: true
-			});
-
-			var master = gitGraph.branch("master").commit("Hallo Git")
-			.commit("again")
-			.commit({
-				message: "Ein neuer Beitrag"
-			});
-			var feature = master.branch("feature");
-			master.commit({
-				message: "beitrag auf master",
-				dotColor: "white",
-				tag: "master"});
-			feature.commit({
-				message: "beitrag auf feature",
-				dotColor: "blue",
-				tag: "feature (hier sind wir)"});
-		});
-		</script>
+		<img height="180em" src="img/git/branch-feature.svg" />
 	</section>
 </section>
 
 <section>
 	<section>
 		<h1>git merge</h1>
-		<pre><code class="hljs bash">$ git checkout master
+		<pre style="width:50%; float: left"><code class="hljs bash">$ # PWD=~/git-tutorial/local
+$ git checkout master
 $ git branch
 feature
 * master
-$ git merge feature
+$ git merge feature # vim -> :wq
 Aktualisiere 3ff104e..85de3a4
 Fast-forward
 file2.txt | 1 +
 1 file changed, 1 insertion(+)
-$ tail -n 1 file*
+</code></pre>
+		<pre style="width:50%; float: left"><code class="hljs bash">$ tail -n 1 file*
 ==> file2.txt <==
 beitrag auf feature
 
 ==> file.txt <==
 beitrag auf master
 </code></pre>
-		<canvas id="gitmergeGraph"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitmergeGraph",
-			   mode: "compact",
-			   orientation: "horizontal",
-			   reverseArrow: true
-			});
-
-			var master = gitGraph.branch("master").commit("Hallo Git")
-			.commit("again")
-			.commit({
-				message: "Ein neuer Beitrag"
-			});
-			var feature = master.branch("feature");
-			master.commit({
-				message: "beitrag auf master"});
-			feature.commit({
-				message: "beitrag auf feature",
-				dotColor: "blue",
-				tag: "feature"});
-			feature.merge(master, {message: "merge feature",
-				dotColor: "white",
-				tag: "master (hier sind wir)"});
-		});
-		</script>
+		<img height="180em" src="img/git/branch-merge.svg" />
 	</section>
 </section>
 
@@ -856,34 +829,55 @@ beitrag auf master
 	<section>
 		<h1>Konflikte</h1>
 		<ul>
-			<li>Merge Konflikte können auftreten, wenn zwei Bearbeiterinnnen oder Bearbeiter an der gleichen Stelle in der gleichen Datei änderungen durchführen</li>
+			<li>Merge Konflikte können auftreten, wenn zwei Bearbeiterinnnen oder Bearbeiter an der gleichen Stelle in der gleichen Datei Änderungen durchführen</li>
 			<li>Ein Push kann verweigert werden (<em>reject</em>), wenn eine lokale Änderung durch eine Entfernte Änderung überholt wurde (<em>divergiert</em>)</li>
 		</ul>
 	</section>
 
-	<section>
-		<h1>Merge Konflikt</h1>
+	<section data-markdown>
+		# Merge Konflikt
 
-		<pre><code class="hljs bash">$ git merge feature
-automatischer Merge von file.txt
-KONFLIKT (Inhalt): Merge-Konflikt in file.txt
-Automatischer Merge fehlgeschlagen; beheben Sie die Konflikte und committen Sie dann das Ergebnis.
-$ git status
-Auf Branch master
-Ihr Branch ist vor 'origin/master' um 3 Commits.
-(benutzen Sie "git push", um lokale Commits zu publizieren)
-Sie haben nicht zusammengeführte Pfade.
-(beheben Sie die Konflikte und führen Sie "git commit" aus)
-
-Nicht zusammengeführte Pfade:
-(benutzen Sie "git add/rm &lt;Datei&gt;...", um die Auflösung zu markieren)
-
-von beiden geändert:    file.txt
-
-keine Änderungen zum Commit vorgemerkt (benutzen Sie "git add" und/oder "git commit -a")
-</code></pre>
+		```bash
+		$ # PWD=~/git-tutorial/local
+		$ echo "konflikt von master" >> file.txt
+		$ git add file.txt
+		$ git commit -m "konflikt von master"
+		$ git checkout feature
+		$ echo "konflikt von feature" >> file.txt
+		$ git add file.txt
+		$ git commit -m "konflikt von feature"
+		$ git checkout master
+		```
+		```bash
+		$ # in branch master        $ # in branch feature
+		$ cat file.txt              $ cat file.txt
+		Hallo Git                   Hallo Git
+		again                       again
+		beitrag auf master          konflikt von feature
+		konflikt von master
+		```
 	</section>
 
+	<section data-markdown>
+		# Merge durchführen
+		```bash
+		$ git merge feature
+		automatischer Merge von file.txt
+		KONFLIKT (Inhalt): Merge-Konflikt in file.txt
+		Automatischer Merge fehlgeschlagen; beheben Sie die Konflikte und committen Sie dann das Ergebnis.
+		$ git status
+		Auf Branch master
+		…
+		(beheben Sie die Konflikte und führen Sie "git commit" aus)
+
+		Nicht zusammengeführte Pfade:
+		(benutzen Sie "git add/rm &lt;Datei&gt;...", um die Auflösung zu markieren)
+
+		von beiden geändert:    file.txt
+
+		keine Änderungen zum Commit vorgemerkt (benutzen Sie "git add" und/oder "git commit -a")
+		```
+	</section>
 
 	<section>
 		<h1>Merge Konflikt</h1>
@@ -894,14 +888,16 @@ Hallo Git
 again
 <<<<<<< HEAD
 beitrag auf master
+konflikt von master
 =======
-beitrag auf feature
+konflikt von feature
 >>>>>>> feature
 $ vim file.txt
 $ cat file.txt
 Hallo Git
 again
-beitrag auf master und feature
+beitrag auf master
+konflikt von master und feature behoben
 $ git add file.txt
 $ git commit</code></pre>
 	</section>
@@ -953,7 +949,7 @@ Hinweis: für weitere Details.</code></pre>
 	</section>
 
 	<section>
-		<h1>Push Konflikt (merge)</h1>
+		<h1>Push Konflikt auflösen mit merge</h1>
 		<pre><code class="hljs bash">$ git merge origin/master</code></pre>
 
 		<canvas id="gitpushKonfM"></canvas>
@@ -978,26 +974,21 @@ Hinweis: für weitere Details.</code></pre>
 	</section>
 
 	<section>
-		<h1>Push Konflikt (rebase)</h1>
-		<pre><code class="hljs bash">$ git rebase origin/master</code></pre>
-
-		<canvas id="gitpushKonfR"></canvas>
-		<script>
-		slidehooks.push(function () {
-			var gitGraph = new GitGraph({
-			   template: "meteor",
-			   elementId: "gitpushKonfR",
-			   mode: "compact",
-			   orientation: "vertical",
-			   reverseArrow: true
-			});
-
-		var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
-		//var masterRemote = master.branch("origin/master");
-		master.commit({message: "Ein neuer Beitrag", dotColor: "blue"}).commit({message: "Ein anderer Beitrag", dotColor: "orange"});
-		});
-		</script>
-
+		<section data-markdown>
+			# Zusammenarbeiten mit GitLab
+		</section>
+		<section data-markdown>
+			![](img/gitlab-4.png)
+		</section>
+		<section data-markdown>
+			![](img/gitlab-5.png)
+		</section>
+		<section data-markdown>
+			![](img/gitlab-6.png)
+		</section>
+		<section data-markdown>
+			![](img/gitlab-7.png)
+		</section>
 	</section>
 
 </section>
@@ -1030,6 +1021,39 @@ Hinweis: für weitere Details.</code></pre>
 
 
 	</ul>
+</section>
+<section data-markdown id="lektion-3">
+	# Lektion 3
+	## Lernziele für heute
+
+	* Git Branching Modells
+	* Rebasing
+
+	Note:
+	- Den Studenten mitteilen, dass sie den Folien folgen sollen und die Beipiele nachvollziehen sollen
+</section>
+
+<section>
+	<h1>Push Konflikt (rebase)</h1>
+	<pre><code class="hljs bash">$ git rebase origin/master</code></pre>
+
+	<canvas id="gitpushKonfR"></canvas>
+	<script>
+	slidehooks.push(function () {
+		var gitGraph = new GitGraph({
+		   template: "meteor",
+		   elementId: "gitpushKonfR",
+		   mode: "compact",
+		   orientation: "vertical",
+		   reverseArrow: true
+		});
+
+	var master = gitGraph.branch("master").commit("Hallo Git").commit("again");
+	//var masterRemote = master.branch("origin/master");
+	master.commit({message: "Ein neuer Beitrag", dotColor: "blue"}).commit({message: "Ein anderer Beitrag", dotColor: "orange"});
+	});
+	</script>
+
 </section>
 </div>
 </div>
