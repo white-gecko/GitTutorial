@@ -882,8 +882,7 @@ beitrag auf master
 	<section>
 		<h1>Merge Konflikt</h1>
 
-		<pre><code class="hljs bash">
-$ cat file.txt
+		<pre><code class="hljs bash">$ cat file.txt
 Hallo Git
 again
 <<<<<<< HEAD
@@ -901,10 +900,24 @@ konflikt von master und feature behoben
 $ git add file.txt
 $ git commit</code></pre>
 	</section>
+</section>
 
-	<section>
-		<h1>Push Konflikt</h1>
+<section>
+		<section data-markdown>
+			# Push Konflikt
 
+			```bash
+			$ # PWD=~/git-tutorial/local
+			$ git push
+			$ cd ~/git-tutorial/repo
+			$ echo "konflikt von repo" >> file.txt
+			$ git add file.txt
+			$ git commit -m "konflikt von repo"
+			$ git push
+			```
+		</section>
+		<section>
+			<h1>Push Konflikt</h1>
 		<pre><code class="hljs bash">$ cd ~/git-tutorial/local/
 $ git push
 To /home/natanael/git-tutorial/remote-repo
@@ -917,8 +930,9 @@ Hinweis: Vielleicht müssen Sie die externen Änderungen zusammenzuführen (z.B.
 Hinweis: bevor Sie erneut "push" ausführen.
 Hinweis: Siehe auch die Sektion 'Note about fast-forwards' in 'git push --help'
 Hinweis: für weitere Details.</code></pre>
+		<img height="180em" src="img/git/push-konflikt.svg" />
 	</section>
-
+<!--//
 	<section>
 		<h1>Push Konflikt</h1>
 
@@ -972,6 +986,8 @@ Hinweis: für weitere Details.</code></pre>
 		</script>
 
 	</section>
+
+	//-->
 
 	<section>
 		<section data-markdown>
